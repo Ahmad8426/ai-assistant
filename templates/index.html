@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+</head>
+<body>
+    <!-- Mobile menu toggle for responsive design -->
+    <button class="mobile-menu-toggle d-md-none" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container-fluid main-container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+                </div>
+                <div class="sidebar-content">
+                    <button id="newChatBtn" class="btn btn-primary btn-block">
+                        <i class="fas fa-plus"></i> New Chat
+                    </button>
+
+                    <!-- Theme toggle -->
+                    <div class="theme-section">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5>Theme</h5>
+                            <div class="theme-toggle" data-theme="light" id="themeToggle">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                                <div class="toggle-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversation history -->
+                    <div class="history-section">
+                        <h5>Conversation History</h5>
+                        <div id="conversationList" class="conversation-list">
+                            <!-- Conversations will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="feature-section">
+                        <h5>Features</h5>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-comment"></i> Chat with AI</li>
+                            <li><i class="fas fa-microphone"></i> Voice Input</li>
+                            <li><i class="fas fa-volume-up"></i> Text to Speech</li>
+                            <li><i class="fas fa-language"></i> Translation</li>
+                        </ul>
+                    </div>
+
+                    <div class="settings-section">
+                        <h5>Settings</h5>
+                        <div class="form-group">
+                            <label for="voiceSelect">Voice Type:</label>
+                            <select id="voiceSelect" class="form-control">
+                                <option value="default">Default</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="languageSelect">Translation Language:</label>
+                            <select id="languageSelect" class="form-control">
+                                <option value="en">English</option>
+                                <!-- More languages will be loaded dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div class="col-md-9 main-content">
+                <div class="chat-container">
+                    <div id="chatMessages" class="messages-container"></div>
+                    
+                    <div class="input-container">
+                        <div class="input-group">
+                            <button id="voiceInputBtn" class="btn btn-outline-secondary">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <textarea id="userInput" class="form-control" placeholder="Type your message here..."></textarea>
+                            <button id="sendBtn" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="button-row">
+                            <button id="translateBtn" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-language"></i> Translate
+                            </button>
+                            <button id="speakBtn" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-volume-up"></i> Speak
+                            </button>
+                            <button id="clearBtn" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i> Clear Chat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading spinner modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p id="loadingText" class="mt-2">Processing your request...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div id="toast-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
