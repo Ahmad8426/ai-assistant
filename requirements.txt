@@ -15,3 +15,4 @@ asyncio>=3.4.3
 vosk==0.3.45
 TTS==0.22.0
 torch>=2.0.0
+gunicorn==21.2.0
